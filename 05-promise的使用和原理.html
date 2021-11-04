@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.promise的基本使用,链式调用就是在then中return一个Promise
+        new Promise((resolve,reject) => {
+            setTimeout(() => {
+                // 成功的时候调用resolve
+                resolve("hello world")
+                // 失败的时候调用reject 
+                reject('err message')
+            },1000)
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+
+        //2.promise.all方法,适用于需要依赖两个接口的数据都请求结束后才使用
+        Promise.all([
+            new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    resolve("result1")
+                },2000)
+            }),
+            new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    resolve("result2")
+                })
+            },1000)
+        ]).then((results) => {
+            console.log(results);
+        })
+
+        //promise.all 的手动实现
+        const promiseAll = (arr) => {
+            let resultRes = [];
+            return new Promise((resolve,reject) => {
+                let i = 0;
+                next();
+                function next() {
+                    arr[i].then(res => {
+                        resultRes.push(res);
+                        i++;
+                        if (i === arr.length) {
+                            resolve(resultRes)
+                        } else {
+                            next()
+                        }
+                    })
+                }
+            })
+        }
+        let p1 = Promise.resolve(1)
+        let p2 = Promise.resolve(2)
+        let p3 = Promise.resolve(3)
+
+        promiseAll([p1,p2,p3]).then(res => {
+            console.log(res);
+        })
+    </script>
+</body>
+</html>

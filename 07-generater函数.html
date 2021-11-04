@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //redux中的redux-saga中间件中就是运用了生成器函数，在dispatch的action时进行拦截，对其进行异步请求等其他操作
+        // 生成器函数,默认情况下函数中一行代码都不会执行，当调用next()函数后才会开始执行
+        function* foo() {
+            yield "hello js";
+            yield "hello react";
+            yield "hello vue";
+        }
+        //迭代器
+        const result = foo();
+        console.log(result);
+        //使用迭代器，使用一次next()就会消耗一次迭代器，未消耗完done为false
+        const res1 = result.next()
+        console.log(res1);
+
+        //简单例子：依次生成1-10的数字
+        function* generateNumber() {
+            for(var i = 1; i <= 10; i++) {
+                yield i
+            }
+        }
+        const num = generateNumber();
+        console.log(num.next().value);
+        console.log(num.next().value);
+        console.log(num.next().value);
+
+        //generator 和 promise 一起使用
+        function* fn() {
+            const result1 = yield new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    resolve("hello generator")
+                }, 2000);
+            })
+            console.log(result1);
+        }
+        const it = fn();
+        it.next().value.then(res => { //it.next().value对应的是Promise
+            console.log(res);
+            it.next(res)  //会将res赋值到result1上
+        }) 
+    </script>
+</body>
+</html>

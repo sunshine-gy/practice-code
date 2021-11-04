@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    基本类型：string number boolean undefined null 引用类型： Object Array
+    function 浅拷贝和深拷贝的区别：
+    1.浅拷贝基本类型之间互不影响，引用类型其中一个对象改变了地址，就会影响另一个对象
+    2.深拷贝改变新对象不会影响原对象，他们之间互不影响
+
+    <script>
+      //浅拷贝
+      let obj1 = { name: '张三', action: { say: 'hi'}};
+      let obj2 = Object.assign({}, obj1);  //等价于 let obj2 = {...obj1}
+      obj2.name = '李四';
+      obj2.action.say = 'hello'
+      console.log('obj1',obj1)
+      // obj1 { name: '张三', action: { say: 'hello'}
+      console.log('obj2',obj2)
+      // obj2 { name: '李四', action: { say: 'hello'}
+
+        // 深拷贝
+        let obj3 = { name: '张三', action: { say: 'hi'}};
+        let obj4 = JSON.parse(JSON.stringify(obj1));
+        obj4.name = '李四';
+        obj4.action.say = 'hello'
+        console.log('obj3',obj3) 
+        // obj3 { name: '张三', action: { say: 'hi'}
+        console.log('obj4',obj4) 
+        // obj4 { name: '李四', action: { say: 'hello'}
+
+
+    // $.extend(deepCopy, target, object1, [objectN])//第一个参数为true,就是深拷贝
+    //深拷贝
+    // let obj1 = { name: '张三', action: { say: 'hi'}};
+    // let obj2 = $.extend(true, {}, obj1);
+    // obj2.name = '李四';
+    // obj2.action.say = 'hello'
+    // console.log('obj1',obj1) 
+    // // obj1 { name: '张三', action: { say: 'hi'}
+    // console.log('obj2',obj2) 
+    // // obj2 { name: '李四', action: { say: 'hello'}
+
+    </script>
+  </body>
+</html>

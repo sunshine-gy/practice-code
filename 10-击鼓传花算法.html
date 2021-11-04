@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //封装队列类
+      function Queue() {
+        //属性
+        this.items = [];
+
+        //方法
+
+        //将元素加入到队列中
+        Queue.prototype.enqueue = function (element) {
+          this.items.push(element);
+        };
+        //从队列中删除前端元素
+        Queue.prototype.dequeue = function () {
+          return this.items.shift();
+        };
+        //查看前端元素
+        Queue.prototype.front = function () {
+          return this.items[0];
+        };
+        //查看队列是否为空
+        Queue.prototype.isEmpty = function () {
+          return this.items.length == 0;
+        };
+        //查看队列个数
+        Queue.prototype.size = function () {
+          return this.items.length;
+        };
+        //toString方法
+        Queue.prototype.toString = function () {
+          var queueNumber = "";
+          for (var i = 0; i <= this.items.length; i++) {
+            queueNumber += this.items[i] + " ";
+          }
+          return queueNumber;
+        };
+      }
+
+    //   击鼓传花算法实现
+      function passGame(nameList, num) {
+        //创建队列
+        var queue = new Queue();
+
+        //将所有人添加到队列里
+        for (var i = 0; i < nameList.length; i++) {
+          queue.enqueue(nameList[i]);
+        }
+        //开始数数数字
+        while (queue.size() > 1) {
+          //如果不是num这个数字，就重新加入到队列末尾，如果是num这个数字，就进行删除
+          //num这个之前的人重新放入队列尾部
+          for (var i = 0; i < num - 1 ; i++) {
+            queue.enqueue(queue.dequeue());
+          }
+          //num对应的这个人直接删除
+          queue.dequeue();
+        }
+        //获取剩下的人
+        console.log(queue.size());
+        var endName = queue.front();
+        console.log("最终剩下的人：" + endName);
+
+        return nameList.indexOf(endName);
+      }
+
+      //测试
+      names = ["Juo", "Mkji", "Anjhu", "Xbsh", "Sxsa"];
+      console.log(passGame(names, 3));
+    </script>
+  </body>
+</html>
