@@ -65,6 +65,90 @@
       person1.foo4()(); //person1 会往上级作用域找
       person1.foo4.call(person2)(); //person2 箭头函数只看上级作用域
       person1.foo4().call(person2); //person1 箭头函数只看上级作用域
+      console.log('---------------------------------');
+      //面试题3
+      var name = 'window'
+    function Person (name) {
+      this.name = name
+      this.foo1 = function () {
+        console.log(this.name)
+      },
+      this.foo2 = () => console.log(this.name),
+      this.foo3 = function () {
+        return function () {
+          console.log(this.name)
+        }
+      },
+      this.foo4 = function () {
+        return () => {
+          console.log(this.name)
+        }
+      }
+    }
+    var person1 = new Person('person1')
+    var person2 = new Person('person2')
+
+    person1.foo1() // peron1
+    // 显示绑定优先级大于隐式绑定
+    person1.foo1.call(person2) // person2
+
+    // foo是一个箭头函数，会找上层作用域中的this，那么就是person1
+    person1.foo2() // person1
+    // foo是一个箭头函数，使用call调用不会影响this的绑定，和上面一样向上层查找
+    person1.foo2.call(person2) // person1
+
+    // 调用位置是全局直接调用，所以依然是window（默认绑定）
+    person1.foo3()() // window
+    // 最终还是拿到了foo3返回的函数，在全局直接调用（默认绑定）
+    person1.foo3.call(person2)() // window
+    // 拿到foo3返回的函数后，通过call绑定到person2中进行了调用
+    person1.foo3().call(person2) // person2
+
+    // foo4返回了箭头函数，和自身绑定没有关系，上层找到person1
+    person1.foo4()() // person1
+    // foo4调用时绑定了person2，返回的函数是箭头函数，调用时，找到了上层绑定的person2
+    person1.foo4.call(person2)() // person2
+    // foo4调用返回的箭头函数，和call调用没有关系，找到上层的person1
+    person1.foo4().call(person2) // person1    
+    console.log('---------------------------------');
+    //面试题4
+    var name = 'window'
+    function Person (name) {
+      this.name = name
+      this.obj = {
+        name: 'obj',
+        foo1: function () {
+          return function () {
+            console.log(this.name)
+          }
+        },
+        foo2: function () {
+          return () => {
+            console.log(this.name)
+          }
+        }
+      }
+    }
+    var person1 = new Person('person1')
+    var person2 = new Person('person2')
+    
+    // obj.foo1()返回一个函数
+    // 这个函数在全局作用于下直接执行（默认绑定）
+    person1.obj.foo1()() // window
+    // 最终还是拿到一个返回的函数（虽然多了一步call的绑定）
+    // 这个函数在全局作用于下直接执行（默认绑定）
+    person1.obj.foo1.call(person2)() // window
+    person1.obj.foo1().call(person2) // person2
+
+    // 拿到foo2()的返回值，是一个箭头函数
+    // 箭头函数在执行时找上层作用域下的this，就是obj
+    person1.obj.foo2()() // obj
+    // foo2()的返回值，依然是箭头函数，但是在执行foo2时绑定了person2
+    // 箭头函数在执行时找上层作用域下的this，找到的是person2
+    person1.obj.foo2.call(person2)() // person2
+    // foo2()的返回值，依然是箭头函数
+    // 箭头函数通过call调用是不会绑定this，所以找上层作用域下的this是obj
+    person1.obj.foo2().call(person2) // obj
     </script>
   </body>
 </html>

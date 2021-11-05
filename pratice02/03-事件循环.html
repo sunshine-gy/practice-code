@@ -7,6 +7,57 @@
     <title>Document</title>
 </head>
 <body>
-    this补充别忘了！！！！！！！！！！！
+    一.浏览器的事件循环(一些异步操作的函数会加入到事件队列中，事件队列中的函数会放入调用栈中执行，
+    执行完立即结束，不会阻塞后面代码的执行)
+    1.进程：计算机已经运行的程序   线程：操作系统能够运行运算调度的最小单位
+    2.多数浏览器是多进程的，javascript是单线程的
+    3.宏任务队列：ajax、setTimeout、setInterval、DOM监听、UI Rendering等
+      微任务队列：Promise的then回调、 Mutation Observer API、queueMicrotask()等
+      在执行任何一个宏任务之前，必须保证微任务队列是空的，如果不为空，那么就优先执行微任务队列中的任务（回调）
+
+    二.Node的事件循环(是由libuv实现的，libuv是一个多平台的专注于异步IO的库)
+    1.阻塞IO和非阻塞IO 
+    阻塞式调用：调用结果返回之前，当前线程处于阻塞态（阻塞态CPU是不会分配时间片的），调用线程只有在得到调用结果之后才会继续执行。
+    非阻塞式调用：调用执行之后，当前线程不会停止执行，只需要过一段时间来检查一下有没有结果返回即可。
+
+    <script>
+        // 我们可以将await关键字后面执行的代码，看做是包裹在(resolve, reject) => {函数执行}中的代码；
+        //包裹在(resolve, reject) => {函数执行}中的代码当作同步代码执行
+        //  await的下一条语句，可以看做是then(res => {函数执行})中的代码；
+        async function async1 () {
+        console.log('async1 start')
+        await async2();
+        console.log('async1 end')
+        }
+        
+        async function async2 () {
+        console.log('async2')
+        }
+
+        console.log('script start')
+        
+        setTimeout(function () {
+        console.log('setTimeout')
+        }, 0)
+        
+        async1();
+        
+        new Promise (function (resolve) {
+        console.log('promise1')
+        resolve();
+        }).then (function () {
+        console.log('promise2')
+        })
+
+        console.log('script end')
+        //结果：script start
+            // async1 start
+            // async2
+            // promise1
+            // script end
+            // async1 end
+            // promise2
+            // setTimeout
+    </script>
 </body>
 </html>
