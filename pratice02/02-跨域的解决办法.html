@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    跨域解决方案
+    1.jsonp 原理：动态生成script标签，通过src属性来加载
+            缺点：只支持get请求，不支持post请求
+            应用场景：有些第三方数据接口可能会使用jsonp来解决跨域问题，工作中不常用
+
+    2.中间服务器代理  原理：跨域只存在于浏览器之间，不存在服务器之间，由服务器做中间代理
+
+    3.CORS跨域资源共享  原理：服务器端进行配置，加一个响应头，工作中常用
+
+    4.Vue的反向代理
+
+</body>
+</html>
