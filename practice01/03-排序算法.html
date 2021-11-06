@@ -11,10 +11,10 @@
         // 1.冒泡排序
         let arr =[1,3,5,2,4];
         function sort(arr) {
-            for(let i = 0, len = arr.length - 1; i < len; i++) {
+            for(let i = 0, len = arr.length - 1; i < len; i++) {  //外层循环控制趟数
                 //声明一个变量作为标志位，防止排序结束后继续排序
                 let done = true;
-                for(let j = 0, len = arr.length - 1; j < len - i; j++) {
+                for(let j = 0, len = arr.length - 1; j < len - i; j++) {  //里层循环进行比较
                     if(arr[j] > arr[j+1]) {
                         let temp = arr[j];
                         arr[j] = arr [j+1];
@@ -49,7 +49,7 @@
         }
         console.log(insert(arr));
 
-        // 3.快排算法
+        // 3.快排算法(速率相对最快的一种)
         var quickSort = function(arr) {
             if(arr.length <= 1) {
                 return arr
