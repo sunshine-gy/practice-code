@@ -8,28 +8,28 @@
 </head>
 <body>
     <script>
-        var arr =[0,1,2,3,4,5,6,7,,8,9]
-        test1()
+        var arr =[0,1,2,3,4,5,6,7,,8,9];
+        test1();
         function test1() {
             console.time('test1')
             for(var i = 0; i< arr.length; i++) {
             }
-            console.timeEnd('test1')
+            console.timeEnd('test1');
         }
-        test2()
+        test2();
         function test2() {  //开发中一般选择这个，节省内存，速度较快
             console.time('test2')
             for(var i = 0, len = arr.length; i< len; i++) {
             }
-            console.timeEnd('test2')
+            console.timeEnd('test2');
         }
-        test3()
+        test3();
         function test3() {
             console.time('test3')
             var len = arr.length
             for(var i = 0; i< len; i++) {
             }
-            console.timeEnd('test3')
+            console.timeEnd('test3');
         }
     </script>
 </body>

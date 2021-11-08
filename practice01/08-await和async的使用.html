@@ -8,8 +8,10 @@
 </head>
 <body>
     1.async函数返回的是一个promise对象
+
     2.await在等async函数，等的实际是一个返回值，await不仅仅用于等promise对象，
-    他也可以等任意表达式的结果所以await后面可以接普通函数调用
+      他也可以等任意表达式的结果所以await后面可以接普通函数调用
+
     3.并且await必须在async函数中调用，因为当await等到了promise对象的话，会阻塞后面的代码，
     等到promise对象的resolve，使用async函数会将内部所有阻塞都封装在一个promise对象中异步执行。
 </body>
