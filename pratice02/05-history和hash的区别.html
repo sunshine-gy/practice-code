@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    hash模式和history模式的区别
+    
+    1.最直观的区别是在url中hash带了一个很丑的#而history是没有的
+
+    2.hash虽然出现在url中，但不会包括在http请求中，故改变hash不会重新加载页面
+
+    3.history应用了html5中新增的pushState()和replaceState()方法，它提供了对历史记录进行修改的功能，
+      但执行修改时，虽然改变了当前的url，但浏览器不会立即向后端发生请求
+
+    4.history要玩好，还需要后台的配置支持，因为前端的url和实际向后端发起的请求要一致，否则会返回404错误
+</body>
+</html>
