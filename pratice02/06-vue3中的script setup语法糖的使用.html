@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script setup> 是在单文件组件 (SFC) 中使用组合式 API 的编译时语法糖。 -->
+        有如下几个优势：
+        1.更少的样板内容，更简洁的代码。
+        2.能够使用纯 Typescript 声明 props 和抛出事件。
+        3.更好的运行时性能 (其模板会被编译成与其同一作用域的渲染函数，没有任何的中间代理)。
+        4.更好的 IDE 类型推断性能 (减少语言服务器从代码中抽离类型的工作)
+    <template>
+        <div >
+          <h2 >我是父组件！</h2>
+          <Child msg="hello" @child-click="childCtx" />
+        </div>
+      </template>
+      
+      <script setup>
+      import Child from './Child.vue'; //无需注册子组件了
+      
+      const childCtx = (ctx) => {
+        console.log(ctx);
+      }
+      </script>
+      
+      
+      //Child.vue
+      <template>
+        <span @click="handleClick">我是子组件! -- msg: {{ props.msg }}</span>
+      </template>
+      
+      <script setup>
+      import { useContext, defineProps, defineEmit } from 'vue' //顺序别乱
+      //使用语法糖必须使用 defineProps 和 defineEmits API 来声明 props 和 emits
+      
+      const emit = defineEmit(['child-click'])
+      const ctx = useContext()
+      const props = defineProps({
+        msg: String
+      })
+      
+      const handleClick = () => {
+        emit('child-click', ctx)
+      }
+      </script>
+</body>
+</html>
