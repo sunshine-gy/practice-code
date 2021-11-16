@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 数组扁平化是指：将一个多维数组变成一维数组
+    // 方法1：
+    function flatten(arr) {
+        return arr.reduce((preValue,item) => {
+            return preValue.concat(Array.isArray(item) ? flatten(item) : item)
+        },[])
+    }
+    var arr = [1,2,3,[4,5]];
+    console.log(flatten(arr));
+
+    //方法2：
+    function flatten2(arr1) {
+        return arr1.toString().split(',').map(item => {
+            return Number(item)
+        })
+    }
+    var arr1 = [1,2,3,[4,5]];
+    console.log(flatten2(arr1));
+
+    //方法3：
+    function flatten3(arr2) {
+        return arr2.join(',').split(',').map(item => {
+            return parseInt(item)
+        })
+    }
+    var arr2 = [1,2,3,[4,5]];
+    console.log(flatten3(arr2));
+    
+    //方法4：
+    var arr3 = [];
+    console.log(arr3.concat(...arr2));  //通过es6的扩展运算符也可以将二维数组变成一维数组
+    </script>
+</body>
+</html>
