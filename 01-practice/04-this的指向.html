@@ -9,7 +9,8 @@
   <body>
     <!-- this指向的基本思路：
     1.优先级问题：new绑定>显示绑定(bind)>隐式绑定>默认绑定
-    2.箭头函数问题：箭头函数不绑定this指向，所以会不断的往上层作用域找,并且只看上层作用域，即再使用显示绑定也改变不了this的指向
+    2.箭头函数问题：箭头函数不绑定this指向，所以会不断的往上层作用域找,并且只看上层作用域，
+    即再使用显示绑定也改变不了this的指向
     3.函数中返回一个函数，其this指向为返回函数中的this指向，与绑定的值无关 -->
 
     <script>
@@ -149,6 +150,22 @@
     // foo2()的返回值，依然是箭头函数
     // 箭头函数通过call调用是不会绑定this，所以找上层作用域下的this是obj
     person1.obj.foo2().call(person2) // obj
+
+
+    //面试题4
+      function o() {
+          this.x = 1;
+          this.print = function() {
+              console.log(this.x);
+          }
+      }
+      var o = new o();
+      var print = o.print;
+      print();  //undefined
+
+      var n = {x:2,print:print};
+      n.print() //2
+
     </script>
   </body>
 </html>
