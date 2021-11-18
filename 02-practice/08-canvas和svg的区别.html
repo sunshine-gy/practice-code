@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-<script>
-</script>
-</body>
+  </head>
+  <body>
+    <script>
+      //都是undefined
+      var myname = " 极客时间 ";
+      function showName() {
+        console.log(myname);
+        if (0) {
+          var myname = " 极客邦 ";
+        }
+        console.log(myname);
+      }
+      showName();
+
+    //   let myname= '极客时间'  
+    //   { 
+    //     console.log(myname);
+    //     let myname= '极客邦' 
+    // }
+    //在块作用域内，let声明的变量被提升，但变量只是创建被提升，初始化并没有被提升，
+    //  在初始化之前使用变量，就会形成一个暂时性死区。
+
+    let bar = {
+ myName : " 极客邦 ",
+ test1 : 1
+ } 
+ function foo(){
+ this.myName = " 极客时间 "
+ }  foo.call(bar)
+ console.log(bar)
+ console.log(myName)
+    </script>
+  </body>
 </html>
