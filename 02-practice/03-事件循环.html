@@ -14,6 +14,16 @@
     3.宏任务队列：ajax、setTimeout、setInterval、DOM监听、UI Rendering等
       微任务队列：Promise的then回调、 Mutation Observer API、queueMicrotask()等
       在执行任何一个宏任务之前，必须保证微任务队列是空的，如果不为空，那么就优先执行微任务队列中的任务（回调）
+    补充：
+        1.宏任务：为了协调这些任务有条不紊地在主线程上执行，页面进程引入了消息队列和事件循环机制，
+        2.渲染进程内部会维护多个消息队列，比如延迟执行队列和普通的消息队列。然后主线程采用
+        一个 for 循环，不断地从这些任务队列中取出任务并执行任务。我们把这些消息队列中的任
+        务称为宏任务。
+        微任务：微任务就是一个需要异步执行的函数，执行时机是在主函数执行结束之后、当前宏任务结束
+        之前。
+        3.微任务和宏任务是绑定的，每个宏任务在执行时，会创建自己的微任务队列。
+        4.在一个宏任务中，分别创建一个用于回调的宏任务和微任务，无论什么情况下，微任务都
+        早于宏任务执行。
 
     二.Node的事件循环(是由libuv实现的，libuv是一个多平台的专注于异步IO的库)
     1.阻塞IO和非阻塞IO 
@@ -58,6 +68,15 @@
             // async1 end
             // promise2
             // setTimeout
+            async function foo() {
+                console.log(1)
+                let a = await 100
+                console.log(a)
+                console.log(2)
+            } 
+            console.log(0)
+            foo()
+            console.log(3)
     </script>
 </body>
 </html>
