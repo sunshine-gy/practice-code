@@ -8,8 +8,9 @@
 </head>
 <body>
     diff算法原理
-    1.在数据发生变化时，vue会先根据真实DOM生成一颗virtual DOM,当virtual DOM某个节点的数据改变后会生成一个新的Vnode，
-    然后Vnode和oldVnode作对比，发现有不一样的地方会直接修改在真实的DOM上，然后将oldVnode的值为Vnode，来实现更新节点。
+    1.在数据发生变化时，vue会先根据真实DOM生成一颗virtual DOM,当virtual DOM某个节点的数据改变后会生成一个
+    新的Vnode，然后Vnode和oldVnode作对比，发现有不一样的地方会直接修改在真实的DOM上，然后将oldVnode的值为Vnode，
+    来实现更新节点。
     2.原理简述
     （1）先去同级比较，然后再去比较子节点
     （2）先去判断乙方有子节点一方没有子节点的情况
