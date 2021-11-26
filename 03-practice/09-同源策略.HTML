@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    同源策略：如果两个 URL 的协议、域名和端口都相同，我们就称这两个 URL 同源。
+             同源策略主要表现在 DOM、Web 数据和网络这三个层面。
+
+    DOM层面：同源策略限制了来自不同源的 JavaScript 脚本对当前 DOM 对象读
+    和写的操作。
+
+    数据层面：同源策略限制了不同源的站点读取当前站点的 Cookie、IndexDB、
+    LocalStorage 等数据。
+
+    网络层面：同源策略限制了通过 XMLHttpRequest 等方式将站点的数据发送给不
+    同源的站点。
+
+    补充：同源策略可以隔离各个站点之间的 DOM 交互、页面数据和网络通信，虽然严格的
+    同源策略会带来更多的安全，但是也束缚了 Web。这就需要在安全和自由之间找到一个平衡点，
+    所以我们默认页面中可以引用任意第三方资源，然后又引入 CSP 策略来加以限制；默认
+     XMLHttpRequest 和 Fetch 不能跨站请求资源，然后又通过 CORS 策略来支持其跨域。
+    
+     内容安全策略(CSP):CSP 的核心思想是让服务器决定浏览器能够加载哪些资源，让服务器决定浏览
+     器是否能够执行内联 JavaScript 代码
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    XSS 攻击: 是指黑客往 HTML 文件中或者 DOM 中注入恶意脚本，从而在用户浏览页面时
+    利用注入的恶意脚本对用户实施攻击的一种手段.
+    XSS 攻击主要有三种攻击方式：存储型 XSS 攻击、反射型 XSS 攻击和基于 DOM的 XSS 攻击三种方式来注入恶意脚本
+
+    存储型 XSS 攻击：首先黑客利用站点漏洞将一段恶意 JavaScript 代码提交储存到网站的数据库中；
+    然后用户向网站请求包含了恶意 JavaScript 脚本的页面；当用户浏览该页面的时候，恶意脚本
+    就会将用户的 Cookie 信息等数据上传到服务器。
+
+    反射型 XSS 攻击：用户将一段含有恶意代码的请求提交给 Web 服务器，Web 服务器接收到请求时，
+    又将恶意代码反射给了浏览器端，这就是反射型 XSS 攻击。(比如我们常见的一些恶意链接，qq群或则一些邮件等等)
+
+    基于 DOM的 XSS 攻击：黑客通过各种手段将恶意脚本注入用户的页面中，比如通过网络劫持在页面传输过程中修改 
+    HTML 页面的内容，这种劫持类型很多，有通过 WiFi 路由器劫持的，有通过本地恶意软件来劫持的，它们的共同点是在
+    Web 资源传输过程或者在用户使用页面的过程中修改 Web 页面的数据。基于 DOM 的 XSS 攻击是不牵涉到页面 Web 
+    服务器的。(这个攻击属于前端的安全漏洞，另外两个属于后端的安全漏洞)
+
+
+    如何阻止XSS攻击：
+    1. 服务器对输入脚本进行过滤或转码
+
+    2. 充分利用 CSP，CSP具有如下的功能：
+    2.1.限制加载其他域下的资源文件，这样即使黑客插入了一个 JavaScript 文件，这个JavaScript 文件也是无法被加载的
+    2.2.禁止向第三方域提交数据，这样用户数据也不会外泄；
+    2.3.禁止执行内联脚本和未授权的脚本；
+    2.4.还提供了上报机制，这样可以帮助我们尽快发现有哪些 XSS 攻击，以便尽快修复问题。
+
+    3. 使用 HttpOnly 属性，一些比较重要的数据我们建议在 Cookie 上设置 HttpOnly 标志。使
+    用 HttpOnly 标记的 Cookie 只能使用在 HTTP 请求过程中。
+</body>
+</html>

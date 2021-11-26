@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    CSRF攻击：又称为“跨站请求伪造”，是指黑客引诱用户打开黑客的网站，在黑客的网站中，
+    利用用户的登录状态发起的跨站请求。简单来讲，CSRF 攻击就是黑客利用了用户的登录状态，
+    并通过第三方的站点来做一些坏事。
+
+    有三种方式来进行CSRF攻击：
+    1. 自动发起 Get 请求
+    2. 自动发起 POST 请求
+    3. 引诱用户点击链接
+
+    补充：
+    1.和 XSS 不同的是，CSRF 攻击不需要将恶意代码注入用户的页面，仅仅是利用服务器的漏洞和用户的登录状态来实施攻击。
+    2.发起 CSRF 攻击的三个必要条件：
+    2.1目标站点一定要有 CSRF 漏洞。
+    2.2用户要登录过目标站点，并且在浏览器上保持有该站点的登录状态。
+    2.3需要用户打开一个第三方站点，可以是黑客的站点，也可以是一些论坛。
+
+    如何防止 CSRF 攻击：
+    1. 充分利用好 Cookie 的 SameSite 属性，因为Cookie 正是浏览器和服务器之间维护登录状态的一个关键数据
+
+    2. 服务端验证请求的来源站点，主要验证 Referer 和 Origin 属性，服务器优先判断Origin 属性
+
+    3. CSRF Token，在浏览器向服务器发起请求时，服务器生成一个 CSRF Token。在浏览器端如果要发起转账的请求，
+    那么需要带上页面中的 CSRF Token，然后服务器会验证该 Token 是否合法。如果是第三方站点发出的请求则获取不到
+    CSRF Token，服务器便会拒绝请求。
+
+</body>
+</html>
