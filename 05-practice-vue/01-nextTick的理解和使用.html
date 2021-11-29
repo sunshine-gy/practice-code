@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    什么是Vue.nextTick()？
+    定义：是将回调函数延迟在下一次dom更新数据后调用，简单的理解是：当数据更新了，在dom中渲染后，自动执行该函数
+
+    原理：原理就是使用宏任务或微任务来完成事件调用的机制，让自己的回调事件在一个eventLoop的最后执行。
+    宏任务或微任务根据浏览器情况采取不同的api，常见的 macro task 有 setTimeout、MessageChannel、
+    postMessage、setImmediate；常见的 micro task 有 MutationObserver 和 Promise.then。由于兼容问题，
+    需要采取降级策略，再取决于使用哪个api，在通俗一点 ，你可以吧nextTick想象成为setTimeout 
+    你就是要把这个事件放到本次事件的循环末尾调用。
+
+    补充：异步回调的概念(两种)：
+    1.是把异步回调函数封装成一个宏任务，添加到消息队列尾部，当循环系统执行到该任务的时候执行回调函数。
+    2.执行时机是在主函数执行结束之后、当前宏任务结束之前执行回调函数，这通常都是以微任务形式体现的。
+</body>
+</html>
