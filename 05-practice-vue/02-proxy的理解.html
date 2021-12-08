@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Proxy 对象用于创建一个对象的代理，从而实现基本操作的拦截和自定义（如属性查找、赋值、枚举、函数调用等）。
+    <script>
+        let obj = {
+            name: "臭小肥",
+            title: "可爱"
+        }
+        let handler = {
+            get: function(obj, prop, value) { // 传入四个值，对象本身，属性名，属性值，代理实例本身
+                    if(obj.name === "臭小肥") {
+                        return obj.name = "臭小肥真可爱"
+                    }
+            },
+            set: function(obj, prop, value) {
+                if(prop === 'title') {
+                    obj[prop] = "最可爱"
+                }
+            }
+        }
+        let proxy = new Proxy(obj, handler)
+        console.log(proxy.name);
+        proxy.title = '123'
+        console.log(proxy);
+    </script>
+</body>
+</html>
