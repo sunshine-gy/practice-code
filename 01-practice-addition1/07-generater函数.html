@@ -9,6 +9,7 @@
 <body>
     <script>
         //redux中的redux-saga中间件中就是运用了生成器函数，在dispatch的action时进行拦截，对其进行异步请求等其他操作
+        // 生成器函数就是一个封装的异步任务，或者说时异步的容器异步操作需要暂停的地方，都有 yield 语句注明
         // 生成器函数,默认情况下函数中一行代码都不会执行，当调用next()函数后才会开始执行
         function* foo() {
             yield "hello js";
