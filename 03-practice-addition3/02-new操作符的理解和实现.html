@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // new 的作用：
+        // 1.new 通过构造函数创建出来的实例可以访问到构造函数中的属性
+        // 2.new 通过构造函数创建出来的实例可以访问构造函数原型链中的属性，也就是说通过 new 操作符，
+        //   实例与构造函数通过原型链连接了起来
+
+        // 自己实现 new 操作符：
+        function create(Con, ...args) {
+            let obj = Object.create(Con.prototype); // obj 指向 Con.prototype
+            let result = Con.apply(obj, args); //obj 绑定到 Con 实例上
+            console.log(result,obj);
+            return result instanceof Object ? result : obj //判断构造函数返回值是否为对象，是的话则用返回值
+        }
+        // 测试：
+        function Test(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        Test.prototype.sayName = function() {
+            console.log(this.name);
+        }
+        const a = create(Test, 'feifei', '24');
+        console.log(a.name);
+        console.log(a.age);;
+        a.sayName()
+    </script>
+</body>
+</html>
