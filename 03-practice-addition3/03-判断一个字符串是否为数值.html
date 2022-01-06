@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 题解： isNaN() 来判断是否为空， praseFloat() 返回一个浮点数，若有"123str'则返回123，全是字符返回NaN
+        // isFinite() 会将str转化为数值再进行判断是否为一个有限值，在这里不仅防止输入参数为''等情况
+        // 还有防止刚才'123str'这种情况
+        var numeric = function(str) {
+            return !isNaN(parseFloat(str)) && isFinite(str)
+        }
+        console.log(isFinite('123'));
+    </script>
+</body>
+</html>
