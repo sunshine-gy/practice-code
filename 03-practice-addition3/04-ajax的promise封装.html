@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ajax 请求
+        // 1.创建XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+        // 2.设置状态监听函数
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState !== 4) return;
+            if(xhr.status === 200) {
+                //成功：从服务器获取数据，通过 responseText 拿到响应的文本
+                console.log(xhr.responseText);
+                //do what
+            } else {
+                //失败，根据响应吗判断失败原因
+                new Error(xhr.statusText)
+            }
+        }
+        // 3.规定请求的类型，URL，以及是否异步处理请求
+        xhr.open('GET',url,true);
+        // 4.将请求发送到浏览器
+        xhr.send();
+
+        //用Promise封装AJAX
+        function ajax(method, url, data) {
+            var xhr = new XMLHttpRequest();
+            return new Promise(function(resolve, reject) {
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState !== 4) return;
+                    if(xhr.status === 200) {
+                        resolve(xhr.responseText)
+                    } else {
+                        reject(xhr.statusText)
+                    }
+                }
+                xhr.open(method, url);
+                xhr.send(data);
+            })
+        }
+    </script>
+</body>
+</html>
