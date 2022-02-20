@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Notifier {
+            constructor() {
+                this.observerList = []; // 观察者列表
+            }
+            add(obj) {
+                this.observerList.push(obj) // 添加观察者
+            }
+            remove(obj) {
+                let index = this.observerList.findIndex(o => {  // 找到对象的索引
+                    return o === obj
+                })
+                if(index >= 0) {
+                    this.observerList.splice(index, 1)
+                }
+            }
+            notify() { // 通知每个观察者
+                this.observerList.forEach(obj => {
+                    obj.update()
+                })
+            }
+        }
+        class Observer {  //观察者
+            constructor(name) {
+                this.name = name
+            }
+            update() {
+                console.log(this.name,'收到通知');
+            }
+        }
+        let notifier = new Notifier();
+        let observe1 = new Observer('张三');
+        let observe2 = new Observer('李四');
+        notifier.add(observe1);
+        notifier.add(observe2);
+        notifier.remove(observe1)
+        notifier.notify()
+    </script>
+</body>
+</html>
