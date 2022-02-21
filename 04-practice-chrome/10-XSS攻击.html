@@ -34,6 +34,6 @@
     2.4.还提供了上报机制，这样可以帮助我们尽快发现有哪些 XSS 攻击，以便尽快修复问题。
 
     3. 使用 HttpOnly 属性，一些比较重要的数据我们建议在 Cookie 上设置 HttpOnly 标志。使
-    用 HttpOnly 标记的 Cookie 只能使用在 HTTP 请求过程中。
+    用 HttpOnly 标记的 Cookie 只能使用在 HTTP 请求过程中,无法通过 JavaScript 来读取这段 Cookie。
 </body>
 </html>

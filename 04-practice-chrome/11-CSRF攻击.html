@@ -26,7 +26,7 @@
     如何防止 CSRF 攻击：
     1. 充分利用好 Cookie 的 SameSite 属性，因为Cookie 正是浏览器和服务器之间维护登录状态的一个关键数据
 
-    2. 服务端验证请求的来源站点，主要验证 Referer 和 Origin 属性，服务器优先判断Origin 属性
+    2. 服务端验证请求的来源站点，主要验证请求头中的 Referer 和 Origin 属性，服务器优先判断Origin 属性
 
     3. CSRF Token，在浏览器向服务器发起请求时，服务器生成一个 CSRF Token。在浏览器端如果要发起转账的请求，
     那么需要带上页面中的 CSRF Token，然后服务器会验证该 Token 是否合法。如果是第三方站点发出的请求则获取不到
