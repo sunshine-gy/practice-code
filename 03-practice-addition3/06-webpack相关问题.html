@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    1. webpack与grunt、gulp的不同
+
+        grunt和gulp是基于任务和流的。类似jQuery，找到一个（或一类）文件，对其做一系列链式操作，
+    更新流上的数据， 整条链式操作构成了一个任务，多个任务就构成了整个web的构建流程.
+        webpack是基于入口的。webpack会自动地递归解析入口所需要加载的所有资源文件，然后用不同的Loader
+    来处理不同的文件，用Plugin来扩展webpack功能。(优点：模块打包，编译兼容，能力扩展)
+
+    2.Loader和Plugin的不同？
+
+        Loader直译为"加载器"。Webpack将一切文件视为模块，但是webpack原生是只能解析js文件，如果想将其他文件
+    也打包的话，就会用到loader。 所以Loader的作用是让webpack拥有了加载和解析非JavaScript文件的能力。
+        Plugin直译为"插件"。Plugin可以扩展webpack的功能，让webpack具有更多的灵活性。 在 Webpack 运行的
+    生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。
+    
+    3.是否写过Loader和Plugin？描述一下编写loader或plugin的思路？
+
+        Loader：编写Loader时要遵循单一原则，每个Loader只做一种"转义"工作。 每个Loader的拿到的是源文件内容，
+    可以通过返回值的方式将处理后的内容输出，也可以调用this.callback()方法，将内容返回给webpack。 
+    还可以通过 this.async()生成一个callback函数，再用这个callback将处理后的内容输出出去。
+
+        Plugin：遵循以下的原则(先是讲一下在 Webpack 运行的生命周期中...)
+        compiler暴露了和 Webpack整个生命周期相关的钩子,compilation则暴露了与模块和依赖有关的粒度更小的事件钩子
+        1.插件必须是一个函数或者是一个包含 apply 方法的对象，这样才能访问compiler实例；
+        2.传给每个插件的 compiler 和 compilation 对象都是同一个引用，若在一个插件中修改了它们身上的属性，
+        会影响后面的插件;
+        3.异步的事件需要在插件处理完任务时调用回调函数通知 Webpack 进入下一个流程，不然会卡住;
+
+    4.webpack的整个打包流程
+        1、读取webpack的配置参数；
+        2、启动webpack，创建Compiler对象并开始解析项目；
+        3、从入口文件（entry）开始解析，并且找到其导入的依赖模块，递归遍历分析，形成依赖关系树；
+        4、对不同文件类型的依赖模块文件使用对应的Loader进行编译，最终转为Javascript文件；
+        5、整个过程中webpack会通过发布订阅模式，向外抛出一些hooks，而webpack的插件即可通过监听
+        这些关键的事件节点，执行插件任务进而达到预输出结果的目的。
+
+    5.你知道sourceMap是什么吗？
+        sourceMap是一项将编译、打包、压缩后的代码映射回源代码的技术，由于打包压缩后的代码并没有阅读性可言，
+        一旦在开发中报错或者遇到问题，直接在混淆代码中debug问题会带来非常糟糕的体验，sourceMap可以帮助我们
+        快速定位到源代码的位置，提高我们的开发效率。
+
+    6.如何利用webpack来优化前端性能？
+        1.压缩代码。删除多余的代码、注释、简化代码的写法等等方式
+        2.利用CDN加速。在构建过程中，将引用的静态资源路径修改为CDN上对应的路径。
+        3.删除死代码（Tree Shaking）。将代码中永远不会走到的片段删除掉。
+        4.提取公共代码。
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 简单版本：
+        const mySetInterval = (cb, time) => {
+            const fn = () => {
+                cb();            // 执行传入的回调函数
+                setTimeout(() => {
+                    fn()         // 递归调用自己
+                } 
+                , time)
+            }
+            setTimeout(fn, time)
+        }
+
+        // 接下来clearInterval的实现
+        //之所以用全局的 Object 来做，由于 id 是 Number 类型，我们拿到的是全局变量 timeId 的值拷贝而不是引用，
+        // 导致多个清除计时器存在的话，会覆盖掉 timeId 的值
+        let timeMap = {};
+        let id = 0;  // 简单实现id唯一
+        const mySetInterval = (cb, time) => {
+            let timeId = id;  // 将timeId赋予id
+            id++;             // id 自增实现唯一id
+            const fn = () => {
+                cb();
+                timeMap[timeId] = setTimeout(() => {
+                    fn()
+                }, time)
+            }
+            timeMap[timeId] = setTimeout(fn, time);
+            return timeMap[timeId]  // 返回timeId
+        }
+        // clearInterval的实现
+        const myClearInterval = (id) => {
+            clearTimeout(timeMap[id]) // 通过timeMap[id]获取真正的id
+            delete timeMap[id]
+        }
+
+    </script>
+</body>
+</html>
