@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    vm.$set() 解决对象新增属性不能响应的问题和给数组赋值属性和数组长度不能响应的问题。
+    vm.$set 的实现原理是：
+    
+    1.如果 target 是数组，直接使用数组的 splice 方法把 val 设置到 target 中的指定位置，数组拦截器会侦测到
+    target 变化，从而将新增的 val 转化成响应式的。
+
+    2.如果目标是对象，会先判读属性是否存在、对象是否是响应式，最终如果要对属性进行响应式处理，则是通过调用
+    defineReactive 方法进行响应式处理（ defineReactive 方法就是  Vue 在初始化对象时，给对象属性采用 
+    Object.defineProperty 动态添加 getter 和 setter 的功能所调用的方法）
+
+</body>
+</html>

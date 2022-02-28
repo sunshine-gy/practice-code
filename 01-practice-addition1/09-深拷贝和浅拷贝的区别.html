@@ -9,8 +9,14 @@
   <body>
     基本类型：string number boolean undefined null 引用类型： Object Array
     function 浅拷贝和深拷贝的区别：
-    1.浅拷贝基本类型之间互不影响，引用类型其中一个对象改变了地址，就会影响另一个对象
-    2.深拷贝改变新对象不会影响原对象，他们之间互不影响
+
+    1.浅拷贝：
+        创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，
+    拷贝的就是基本类型的值，如果属性是引用类型，拷贝的就是内存地址 ，所以如果其中一个对象改变了这个地址，
+    就会影响到另一个对象。
+
+    2.深拷贝：
+        将一个对象从内存中完整的拷贝一份出来,从堆内存中开辟一个新的区域存放新对象,且修改新对象不会影响原对象。
 
     <script>
       //浅拷贝
@@ -33,18 +39,43 @@
         console.log('obj4',obj4) 
         // obj4 { name: '李四', action: { say: 'hello'}
 
+      // 浅拷贝：
+      function cloneTarget(target) {
+        let cloneTarget = {};
+        for(const key of target) {
+          cloneTarget[key] = target[key]
+        }
+        return cloneTarget
+      }
 
-    // $.extend(deepCopy, target, object1, [objectN])//第一个参数为true,就是深拷贝
-    //深拷贝
-    // let obj1 = { name: '张三', action: { say: 'hi'}};
-    // let obj2 = $.extend(true, {}, obj1);
-    // obj2.name = '李四';
-    // obj2.action.say = 'hello'
-    // console.log('obj1',obj1) 
-    // // obj1 { name: '张三', action: { say: 'hi'}
-    // console.log('obj2',obj2) 
-    // // obj2 { name: '李四', action: { say: 'hello'}
-
+      // 深拷贝：
+      function deepClone(target) {
+        if(typeof target === 'object') {
+          let cloneTarget = Array.isArray(target) ? [] : {};
+          for(const key of target) {
+            cloneTarget[key] = deepClone(target[key])
+          }
+          return cloneTarget
+        } else {
+          return target
+        }
+      }
+      // 上面这个方法碰到循环引用则会栈溢出(如 obj.obj)，改进如下：
+      function deepClone(target, map = new Map()) {
+        if(typeof target === 'object') {
+          let cloneTarget = Array.isArray(target) ? [] : {};
+          if(map.get(target)) {
+            return map.get(target)
+          }
+          map.set(target, cloneTarget)
+          for(const key in target) {
+            cloneTarget[key] = deepClone(target[key], map)
+          }
+          return cloneTarget
+        } else {
+          return target
+        }
+      }
     </script>
   </body>
 </html>

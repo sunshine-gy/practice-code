@@ -22,11 +22,9 @@
 
     2.MVP模式在MVC的进化形式， Presenter作为中间层负责MV通讯，解决了两者的耦合问题，但p层过去臃肿会导致维护问题
 
-    3.MVVM核心是中间的vm层：
-    ViewModel通过实现一套数据相应式机制自动响应Model中数据变化。同时ViewModel会实现一套更新侧率自动将
-    数据变化转化为视图更新，通过时间监听响应View中用户交互修改Model中数据。这样在ViewModel中就减少了大量
-    DOM操作代码。MVVM在保持view和Model松耦合的同时，还减少了维护他们的关系的代码，使用用户专注于业务逻辑，
-    兼顾开发率和可维护性。
-    
+    3.MVVM核心是中间的vm层：(ViewModel的职责就是把model对象封装成可以显示和接受输入的界面数据对象。)
+    Model和View并无直接关联，而是通过ViewModel来进行联系的，Model和ViewModel之间有着双向数据绑定的联系。
+    因此当Model中的数据改变时会触发View层的刷新，View中由于用户交互操作而改变的数据也会在Model中同步。
+    简单的说，ViewModel就是View与Model的连接器，View与Model通过ViewModel实现双向绑定。
 </body>
 </html>
