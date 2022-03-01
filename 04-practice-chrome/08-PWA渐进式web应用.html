@@ -35,6 +35,7 @@
 
     Web Worker： 目的是让 JavaScript 能够运行在页面主线程之外，不过由于 WebWorker 中是没有
     当前页面的 DOM 环境的，所以在 Web Worker 中只能执行一些和 DOM 无关的 JavaScript 脚本，
-    并通过 postMessage 方法将执行的结果返回给主线程。
+    并通过 postMessage 方法将执行的结果返回给主线程。不过 Web Worker 是临时的，每次 JavaScript
+    脚本执行完成之后都会退出，执行结果也不能保存下来。
 </body>
 </html>

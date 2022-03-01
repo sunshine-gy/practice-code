@@ -19,7 +19,7 @@
         // 自己实现 new 操作符：
         function create(Con, ...args) {
             let obj = Object.create(Con.prototype); // obj 指向 Con.prototype
-            let result = Con.apply(obj, args); //obj 绑定到 Con 实例上
+            let result = Con.apply(obj, args); //obj 绑定到 Con 实例上 
             console.log(result,obj);
             return result instanceof Object ? result : obj //判断构造函数返回值是否为对象，是的话则用返回值
         }

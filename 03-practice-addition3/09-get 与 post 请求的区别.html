@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    get 与 post 请求的区别：
+    1. get 请求一般是去获取数据，post 请求一般是去提交数据。
+
+    2. get 因为参数会放在 url 中，所以隐私性，安全性较差，请求的数据长度是有限制的，一般是2 ~ 8k之间。
+       post请求是没有的长度限制，请求参数是放在body中。
+       get 请求参数会保存在浏览器历史记录内,post 请求并不会。
+
+    3.get请求可以被缓存，post请求不会被缓存。
+
+    4. get请求只能进行url编码（application-x-www-form-urlencoded）,post请求支持多种（multipart/form-data等）
+
+    5.get请求刷新服务器或者回退没有影响，post请求回退时会重新提交数据请求。
+
+    6.get 和 post都是http请求方式， 底层都是 TCP/IP协议；通常GET 产生一个 TCP 数据包；POST 产生两个 TCP 数据包。
+
+    7.浏览器在发送 get 请求时会将 header 和 data 一起发送给服务器，服务器返回 200 状态码,而在发送 post 请求时，
+    会先将 header 发送给服务器，服务器返回 100，之后再将 data 发送给服务器，服务器返回 200 OK
+</body>
+</html>

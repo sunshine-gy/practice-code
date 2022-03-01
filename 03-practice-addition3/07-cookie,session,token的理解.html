@@ -22,6 +22,14 @@
     4.存储大小不同： 单个 Cookie 保存的数据不能超过 4K，Session 可存储数据远高于 Cookie，但是当访问量过多，
     会占用过多的服务器资源。
 
+    sessionStorage 和 localStorage：
+    sessionStorage:可以将一部分数据在当前会话中保存下来，刷新页面数据依旧存在。但当页面关闭后，sessionStorage 
+    中的数据就会被清空。
+
+    localStorage: 除非被清除，否则永久保存。
+
+    两者共同点：一般为5MB，仅在客户端（即浏览器）中保存，不参与和服务器的通信
+
     Token： 访问资源接口（API）时所需要的资源凭证，Token 使服务端无状态化，不会存储会话信息。
 </body>
 </html>
