@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    1、固定定位fixed：(脱离文档流)
+    元素的位置相对于浏览器窗口是固定位置，即使窗口是滚动的它也不会移动。Fixed定位使元素的位置与文档流无关，
+    因此不占据空间。 Fixed定位的元素和其他元素重叠。
+
+    2、相对定位relative：(不会脱离文档流)
+    如果对一个元素进行相对定位，它将出现在它所在的位置上。然后，可以通过设置垂直或水平位置，让这个元素“相对于”
+    它的起点进行移动。 在使用相对定位时，无论是否进行移动，元素仍然占据原来的空间。因此，移动元素会导致它覆盖其它框。
+
+    3、绝对定位absolute：(脱离文档流)
+    绝对定位的元素的位置相对于最近的已定位父元素，如果元素没有已定位的父元素，那么它的位置相对于<html>。
+    absolute 定位使元素的位置与文档流无关，因此不占据空间。 absolute 定位的元素和其他元素重叠。
+
+    4、粘性定位sticky：
+    元素先按照普通文档流定位，然后相对于该元素在流中的flow root（BFC）和 containing block（最近的块级祖先元素）定位。
+    而后，元素定位表现为在跨越特定阈值前为相对定位，之后为固定定位。
+
+    5、默认定位Static：
+    默认值。没有定位，元素出现在正常的流中（忽略top, bottom, left, right 或者 z-index 声明）。
+
+    6、inherit:
+    规定应该从父元素继承position 属性的值。
+
+    z-index 什么情况下失效？
+    1.父标签 position 属性为 relative。
+    2.该标签含有 float 属性的值。
+    3.该标签没有 position 属性（不包括 static）
+</body>
+</html>
