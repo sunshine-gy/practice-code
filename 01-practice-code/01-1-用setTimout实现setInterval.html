@@ -8,8 +8,12 @@
 </head>
 <body>
     <script>
+        // setInterval 的缺点：
+        // 1.不去关心回调函数是否还在运行。在某些情况下，函数可能需要比间隔时间更长的时间去完成执行。
+        // 2.忽视错误，因为某些原因，setInterval调用的代码中会出现一个错误，但是代码并不会中止执行而是继续执行错误的代码。
+        
         // 简单版本：
-        const mySetInterval = (cb, time) => {
+        const mySetInterval1 = (cb, time) => {
             const fn = () => {
                 cb();            // 执行传入的回调函数
                 setTimeout(() => {
@@ -25,7 +29,7 @@
         // 导致多个清除计时器存在的话，会覆盖掉 timeId 的值
         let timeMap = {};
         let id = 0;  // 简单实现id唯一
-        const mySetInterval = (cb, time) => {
+        const mySetInterval2 = (cb, time) => {
             let timeId = id;  // 将timeId赋予id
             id++;             // id 自增实现唯一id
             const fn = () => {
@@ -42,7 +46,6 @@
             clearTimeout(timeMap[id]) // 通过timeMap[id]获取真正的id
             delete timeMap[id]
         }
-
     </script>
 </body>
 </html>
