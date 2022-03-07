@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    1px 问题指的是：在一些 Retina屏幕 的机型上，移动端页面的 1px 会变得很粗，呈现出不止 1px 的效果。
+    CSS 中的 1px 并不能和移动设备上的 1px 划等号。它们之间的比例关系有一个专门的属性来描述：
+    (window.devicePixelRatio = 设备的物理像素 / CSS像素。) 谷歌window.devicePixelRatio = 2
+
+    思路一：直接写 0.5px
+    先在 JS 中拿到 window.devicePixelRatio 的值，然后把这个值通过 JSX 或者模板语法给到 CSS 的 data 里
+    <div id="container" data-device={{window.devicePixelRatio}}></div>
+    然后在：
+
+      思路二：先放大、后缩小：在目标元素的后面追加一个 ::after 伪元素，让这个元素布局为 absolute 之后、
+      整个伸展开铺在目标元素上，然后把它的宽和高都设置为目标元素的两倍，border值设为 1px。接着借助 CSS 
+      动画特效中的放缩能力，把整个伪元素缩小为原来的 50%。此时，伪元素的宽高刚好可以和原有的目标元素对齐，
+      而 border 也缩小为了 1px 的二分之一，间接地实现了 0.5px 的效果。
+</body>
+<style>
+    /* 思路一： */
+    #container[data-device="2"] {
+        border:0.5px solid #333
+      }
+
+      /* 思路二： */
+    #container[data-device="2"] {
+        position: relative;
+    }
+    #container[data-device="2"]::after{
+        position:absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        content:"";
+        transform: scale(0.5);
+        transform-origin: left top;
+        box-sizing: border-box;
+        border: 1px solid #333;
+    }
+</style>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .one {
+        width: 0;
+        height: 0;
+        border: 100px solid transparent;
+        border-bottom: 100px solid pink;
+    }
+    .two {
+        border: 100px solid transparent;
+        width: 0;
+        height: 0;
+        border-radius: 100px;
+        border-top-color: pink
+    }
+    .three {
+        /* 方法一 */
+        /* width: 20%;
+        height: 20vw;
+        background: tomato; */
+        /* 方法二 */
+        width: 20%;
+        height: 0;
+        padding-top: 20%;
+        background: orange;
+    }
+</style>
+<body>
+<!-- 三角形 -->
+    <div class="one"></div>
+<!-- 扇形 -->
+    <div class="two"></div>
+<!-- 自适应正方形 -->
+    <div class="three"></div>
+</body>
+</html>

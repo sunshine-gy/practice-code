@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    浮动的定义： 非IE浏览器下，容器不设高度且子元素浮动时，容器高度不能被内容撑开。 此时，
+                内容会溢出到容器外面而影响布局。这种现象被称为浮动（溢出）。
+
+    清除浮动：
+    1.给父级div定义height属性
+    2.最后一个浮动元素之后添加一个空的div标签，并添加clear:both样式
+    3.包含浮动元素的父级标签添加overflow:hidden或者overflow:auto
+    4.使用 :after 伪元素。
+</body>
+</html>

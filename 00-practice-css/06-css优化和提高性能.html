@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    CSS 优化和提高性能的方法有哪些？
+    一.加载性能：
+    1.css压缩：将写好的css进行打包压缩，可以减小文件体积。
+    2.css单一样式：当需要下边距和左边距的时候，使用margin-bottom:bottom;margin-left:left;执行效率会更高。
+    3.减少使用@import，建议使用link，因为后者在页面加载时一起加载，前者是等待页面加载完成之后再进行加载。
+    二渲染性能：
+    1.尽量减少页面重排、重绘。
+    2.css雪碧图，同一页面相近部分的小图标，方便使用，减少页面的请求次数。
+    3.慎重使用高性能属性：浮动、定位。
+    4.选择器优化嵌套，尽量避免层级过深。
+</body>
+</html>
