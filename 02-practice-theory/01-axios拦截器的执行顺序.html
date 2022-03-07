@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    1.代码开始构建了一个config配置对象，用于第一次执行Promise返回一个成功的promise
+    2.最核心的数组chain，这个数据中保存了请求拦截器函数，响应拦截器函数和默认就有的发送请求的函数，
+    第一步返回的成功的promise对象，将遍历这个数组逐一执行里面的函数，并返回新的Promise对象
+    3.往数组中添加请求拦截器函数，依照axios请求的执行顺序，请求拦截器应该在发送请求之前执行，
+    故应该添加在发送请求函数的前面，所以使用的是数组的unshift方法，这个方法意思是头部添加，即后面添加的元素总是在头部
+    4.往数组中添加请求拦截器函数，依照axios请求的执行顺序，响应拦截器应该在发送请求之后执行，
+    故应该添加在发送请求函数的后面，所以使用的是数组的push方法，这个方法意思是尾部添加，即后面添加的元素总是在尾部
+    5.promise遍历执行，使用的while循序，使用数组的shift方法每次从中取出两个函数执行(成功回调，失败回调)
+    6.返回Promise对象，用于执行我们指定的响应数据的回调
+    <script>
+    //源码部分
+      Axios.prototype.request = function request(config) {
+        /*eslint no-param-reassign:0*/
+        // Allow for axios('example/url'[, config]) a la fetch API
+        if (typeof config === "string") {
+          config = arguments[1] || {};
+          config.url = arguments[0];
+        } else {
+          config = config || {};
+        }
+
+        // 合并配置
+        config = mergeConfig(this.defaults, config);
+        // 添加method配置, 默认为get
+        config.method = config.method ? config.method.toLowerCase() : "get";
+
+        /*
+            创建用于保存请求/响应拦截函数的数组
+            数组的中间放发送请求的函数
+            数组的左边放请求拦截器函数(成功/失败)
+            数组的右边放响应拦截器函数
+            */
+        var chain = [dispatchRequest, undefined];
+        var promise = Promise.resolve(config);
+
+        // 后添加的请求拦截器保存在数组的前面
+        this.interceptors.request.forEach(function unshiftRequestInterceptors(
+          interceptor
+        ) {
+          chain.unshift(interceptor.fulfilled, interceptor.rejected);
+        });
+        // 后添加的响应拦截器保存在数组的后面
+        this.interceptors.response.forEach(function pushResponseInterceptors(
+          interceptor
+        ) {
+          chain.push(interceptor.fulfilled, interceptor.rejected);
+        });
+
+        // 通过promise的then()串连起所有的请求拦截器/请求方法/响应拦截器
+        while (chain.length) {
+          promise = promise.then(chain.shift(), chain.shift());
+        }
+
+        // 返回用来指定我们的onResolved和onRejected的promise
+        return promise;
+      };
+    </script>
+  </body>
+</html>

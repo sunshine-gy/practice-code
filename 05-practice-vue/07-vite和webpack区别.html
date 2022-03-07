@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    1.webpack会先打包，然后启动开发服务器，请求服务器时直接给予打包结果。
+      而vite是直接启动开发服务器，请求哪个模块再对该模块进行实时编译。
+
+    2.由于现代浏览器本身就支持ES Module，会自动向依赖的Module发出请求。
+      vite充分利用这一点，将开发环境下的模块文件，就作为浏览器要执行的文件，而不是像webpack那样进行打包合并。
+
+    3.由于vite在启动的时候不需要打包，也就意味着不需要分析模块的依赖、不需要编译，因此启动速度非常快。
+
+    4.当浏览器请求某个模块时，再根据需要对模块内容进行编译。这种按需动态编译的方式，极大的缩减了编译时间，
+      项目越复杂、模块越多，vite的优势越明显。
+
+    5.在HMR方面，当改动了一个模块后，仅需让浏览器重新请求该模块即可，不像webpack那样需要把该模块的相关依赖
+      模块全部编译一次，效率更高。
+
+    补充：Rollup 与 webpack的区别：
+    1.webpack 拆分代码， 按需加载； Rollup 所有资源放在同一个地方，一次性加载，利用 tree-shake 特性来剔除
+      项目中未使用的代码。
+    2.webpack 相对来说拥有更大的社区支持，资源更加齐全，文档更加完整，有更完整的插件库。
+    3.对于应用使用 webpack，对于类库使用 Rollup 。
+</body>
+</html>

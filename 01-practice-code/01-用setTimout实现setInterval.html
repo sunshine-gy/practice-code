@@ -39,7 +39,7 @@
                 }, time)
             }
             timeMap[timeId] = setTimeout(fn, time);
-            return timeMap[timeId]  // 返回timeId
+            return timeId  // 返回timeId
         }
         // clearInterval的实现
         const myClearInterval = (id) => {

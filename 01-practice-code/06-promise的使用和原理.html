@@ -62,10 +62,10 @@
         // 包含一个 then 方法，并接收两个参数 onFulfilled、onRejected
         then(onFulfilled, onRejected) {
             if (this.status === FULFILLED) {
-            onFulfilled(this.value)
+                onFulfilled(this.value)
             }
             if (this.status === REJECTED) {
-            onRejected(this.reason)
+                onRejected(this.reason)
             }
             if (this.status === PENDING) {
                 // 如果promise的状态是 pending，需要将 onFulfilled 和 onRejected 函数存放起来，

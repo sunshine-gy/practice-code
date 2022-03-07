@@ -26,5 +26,9 @@
     Model和View并无直接关联，而是通过ViewModel来进行联系的，Model和ViewModel之间有着双向数据绑定的联系。
     因此当Model中的数据改变时会触发View层的刷新，View中由于用户交互操作而改变的数据也会在Model中同步。
     简单的说，ViewModel就是View与Model的连接器，View与Model通过ViewModel实现双向绑定。
+    MVVM的缺点：
+    1.数据绑定使得 Bug 不易调试，也会使得一个位置的 Bug 被快速传递到别的位置。 
+    2.虽然使用Model方便了保证数据一致性，但是大的模块中长期不释放内存就会造成花费更多的内存。 
+    3.数据双向绑定不利于View部分的代码复用。
 </body>
 </html>
