@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    一. git rebase 和 git merge 的区别
+    1. merge 会合并中修改的内容生成一个新的 commit，rebase则不会，而是把一个分支上的修改在另一个分支上复制了一遍，
+    故 merge 不会改变历史提交的 hash 值，而 rebase 会修改历史提交的 hash 值。
+    2. merge 合并保留了作品的完整历史记录，包括按时间顺序排列，rebase 提交变得整洁，仅与分支上的作品相关。
+
+    二. git reset、git revert 有什么区别
+    1. git reset 可以将一个分支的末端指向之前的一个 commit。然后再下次 git 执行垃圾回收的时候，会把这个 
+    commit 之后的 commit 都扔掉。
+    2. git revert 会以创建新的 commit 的方式来撤销 commit，这样能保留之前的 commit 历史，比较安全。
+    3. git revert 不支持文件层面的操作。不要在公共分支做 git reset 操作。
+
+    三. gitignore 的作用就是帮助我们在 git add 时将我们指定的一些文件自动排除在外，不提交到 git 当中。
+</body>
+</html>

@@ -93,31 +93,43 @@
             )
 
         // promise.all 的手动实现
-        const promiseAll = (arr) => {
-            let resultRes = [];
-            return new Promise((resolve,reject) => {
-                let i = 0;
-                next();
-                function next() {
-                    arr[i].then(res => {
-                        resultRes.push(res);
-                        i++;
-                        if (i === arr.length) {
-                            resolve(resultRes)
-                        } else {
-                            next();
-                        }
-                    })
+        function all(arr){
+            //返回一个promise
+            return new Promise((res,rej) => {
+                let length = arr.length  //传入的promise的个数
+                let count = 0  //进入fullFilled的promise个数
+                const result = []  //创建一个等长的数组,放置结果
+                // 当传递是一个空数组，返回一个为fulfilled状态的promise
+                if(arr.length === 0 ) {
+                return new Promise.resolve(arr)
+                }
+                for(let i = 0; i < arr.length; i++){
+                arr[i].then(resolve => {
+                    result.push(resolve) //将每次结果保存在result数组中
+                    count ++  //个数加1
+                    //是否所有的promise都进入fullFilled状态
+                    if(count === length){
+                    res(result)  //返回结果
+                    }
+                }).catch(e => {
+                    rej(e)  //如果有错误则直接结束循环，并返回错误
+                })
                 }
             })
-        }
-        // let p1 = Promise.resolve(1)
-        // let p2 = Promise.resolve(2)
-        // let p3 = Promise.resolve(3)
+            }
 
-        // promiseAll([p1,p2,p3]).then(res => {
-        //     console.log(res);
-        // })
+        // promise.race 的实现
+            function race(arr){
+                return new Promise((res,rej) => {
+                    for(let i = 0; i < arr.length; i++){
+                    arr[i].then(resolve => {
+                        res(resolve)  //某一promise完成后直接返回其值
+                    }).catch(e => {
+                        rej(e)  //如果有错误则直接结束循环，并返回错误
+                    })
+                    }
+                })
+                }
 
         // 用 promise 实现 sleep 函数
         const sleep = (time) => {
@@ -128,6 +140,32 @@
         sleep(3000).then(() => {
             console.log(123)
         })
+
+        // 手写一个EventBus
+        class EventBus {
+            constructor() {
+                this.eventObj = []
+            }
+            on(eventName, cb) {
+                if(this.eventObj[eventName]) {
+                    this.eventObj[eventName].push(cb)
+                } else {
+                    this.eventObj[eventName] = [cb]
+                }
+            }
+            emit(eventName, ...args) {
+                if(!this.eventObj[eventName]) {
+                    console.log('事件不存在');
+                } else {
+                    this.eventObj[eventName].map(cb => cb(...args))
+                }
+            }
+            off(eventName) {
+                if(this.eventObj[eventName]) {
+                    delete this.eventObj[eventName]
+                }
+            }
+        }
     </script>
 </body>
 </html>

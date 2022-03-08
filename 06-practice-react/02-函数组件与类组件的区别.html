@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    函数式组件和类组件的区别:
+    1. 语法上的区别：
+    函数式组件是一个纯函数，它是需要接受props参数并且返回一个React元素就可以了。类组件是需要继承React.Component的，
+    而且class组件需要创建render并且返回React元素，语法上来讲更复杂。
+
+    2. 调用方式:
+    函数式组件可以直接调用，返回一个新的React元素；类组件在调用时是需要创建一个实例的，然后通过调用实例里的render
+    方法来返回一个React元素。
+
+    3. 状态管理:
+    函数式组件没有状态管理，类组件有状态管理。
+
+    hooks 的优缺点：
+    1.更容易复用代码，利用自定义 hooks。
+    2.代码量更少。
+
+    缺点：
+    1.响应式的useEffect，必须清楚代码中useEffect和useCallback的“依赖项数组”的改变时机。
+    你的useEffect依赖某个函数的不可变性，这个函数的不可变性又依赖于另一个函数的不可变性，这样便形成了一条依赖链。
+    一旦这条依赖链的某个节点意外地被改变了，你的useEffect就被意外地触发了，如果你的useEffect是幂等的操作，
+    可能带来的是性能层次的问题。
+
+    2.更适合替代一些高阶组件，通用状态工具等，当业务逻辑复杂时需要拆分很多 hooks，工作量也会很大。
+</body>
+</html>
