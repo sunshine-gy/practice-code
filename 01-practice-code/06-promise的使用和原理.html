@@ -117,6 +117,13 @@
                 }
             })
             }
+            let p1 = new Promise((resolve, reject) => {
+                setTimeout(() => {resolve('1');},1000)
+            })
+            let p2 = new Promise((resolve, reject) => {
+                setTimeout(() => {resolve('2');},2000)
+            })
+            all([p1,p2]).then(res => console.log(res));
 
         // promise.race 的实现
             function race(arr){
@@ -140,32 +147,6 @@
         sleep(3000).then(() => {
             console.log(123)
         })
-
-        // 手写一个EventBus
-        class EventBus {
-            constructor() {
-                this.eventObj = []
-            }
-            on(eventName, cb) {
-                if(this.eventObj[eventName]) {
-                    this.eventObj[eventName].push(cb)
-                } else {
-                    this.eventObj[eventName] = [cb]
-                }
-            }
-            emit(eventName, ...args) {
-                if(!this.eventObj[eventName]) {
-                    console.log('事件不存在');
-                } else {
-                    this.eventObj[eventName].map(cb => cb(...args))
-                }
-            }
-            off(eventName) {
-                if(this.eventObj[eventName]) {
-                    delete this.eventObj[eventName]
-                }
-            }
-        }
     </script>
 </body>
 </html>
