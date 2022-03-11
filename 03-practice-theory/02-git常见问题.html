@@ -19,5 +19,11 @@
     3. git revert 不支持文件层面的操作。不要在公共分支做 git reset 操作。
 
     三. gitignore 的作用就是帮助我们在 git add 时将我们指定的一些文件自动排除在外，不提交到 git 当中。
+
+    四： git pull 和 git fetch 的区别
+    1.在作用上他们的功能是大致相同的，都是起到了更新代码的作用
+    2.git pull是相当于从远程仓库获取最新版本，然后再与本地分支merge，即git pull = git fetch + git merge
+    3.相比起来，git fetch 更安全也更符合实际要求，先拉取到本地，在 merge 前，我们可以查看更新情况，根据实际情况
+    再决定是否合并。
 </body>
 </html>
