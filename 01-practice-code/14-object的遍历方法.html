@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = { a: 1, b: 2, c: 3 };
+      Object.prototype.other = { d: 4, e: 5 };
+
+      // 手写 object.keys()
+      const getObjectKeys = (obj) => {
+        // 先定义返回值 res
+        const res = [];
+        // 处理逻辑，遍历所有可枚举属性，推入 res
+        for (prop in obj) {
+          // 为了过滤掉原型上的属性用 hasOwnProperty
+          if (obj.hasOwnProperty(prop)) {
+            res.push(prop);
+          }
+        }
+        return res;
+      };
+      console.log(getObjectKeys(obj)); // ['a','b','c']
+
+      //   手写object.values()
+      const getObjectValues = (obj) => {
+        const res = [];
+        for (prop in obj) {
+          if (obj.hasOwnProperty(prop)) {
+            // 这里返回值就行
+            res.push(obj[prop]);
+          }
+        }
+        return res;
+      };
+
+      console.log(getObjectValues(obj)); // [ 1,2,3]
+
+      // 手写 object.entries()
+
+      const getObjectEntries = function(obj) {
+          const res = [];
+          for(prop in obj) {
+              if(obj.hasOwnProperty(prop)) {
+                  res.push([prop, obj[prop]])
+              }
+          }
+          return res
+      }
+      console.log(getObjectEntries(obj)); // [['a',1],['b',2],['c',3]]
+    </script>
+  </body>
+</html>

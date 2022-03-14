@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 深度优先遍历
+        //方法一：递归处理
+        var test1 = function(node, nodeList = []) {
+            if(node) {
+                nodeList.push(node);
+                let children = node.children || [];
+                // 如果children存在，递归调用
+                for(let i = 0; i < children.length; i++) {
+                    test1(children[i], nodeList)
+                }
+            }
+            return nodeList
+        }
+        // 方法二：栈结构
+        var test2 = function(node) {
+            let nodes = [];
+            let stack = [];
+            if(node) {
+                stack.push(node);
+                while(stack.length) {
+                    // 取最后一个
+                    let item = stack.pop();
+                    console.log(item);
+                    let children = item.children || [];
+                    nodes.push(item);
+             // 如果当前节点有子节点，子节点倒序压入栈，即左边的节点压在上面，右边节点压在下面，出栈达到从左向右的效果
+                    for(let i = children.length - 1; i >= 0; i--) {
+                        stack.push(children[i])
+                    }
+                }
+            }
+            return nodes
+        }
+
+        // 广度优先算法
+        let test3 = (node) => {
+            let nodes = [];
+            let stack = [];
+            if (node) {
+                stack.push(node)
+                while (stack.length) {
+                    //取第一个
+                    let item = stack.shift();
+                    console.log(item);
+                    let children = item.children || [];
+                    nodes.push(item);
+                    for (let i = 0; i < children.length; i++) {
+                        stack.push(children[i])
+                    }
+                }
+            }
+            return nodes
+        }
+
+        // obj
+        let obj = { 
+            children: [{ 
+                index: 0, 
+                children: [{ 
+                    index: 1, 
+                    children: [{ 
+                        index: 3 
+                    }] 
+                }] 
+            }, { 
+                index: 4 
+            }, { 
+                index: 5, 
+                children: [{ 
+                    index: 7, 
+                    children: [{ 
+                        index: 8 
+                    }] 
+                }] 
+            }, { 
+                index: 6 
+            }] 
+        }
+        console.log(test2(obj));
+        console.log(test3(obj));
+        var arr = [];
+        arr.push(obj)
+        console.log(arr);
+    </script>
+</body>
+</html>
