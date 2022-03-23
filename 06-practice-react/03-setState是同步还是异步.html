@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    同步和异步主要取决于它被调用的环境。
+    1.如果 setState 在 React 能够控制的范围被调用，它就是异步的。
+    比如：合成事件处理函数, 生命周期函数, 此时会进行批量更新, 也就是将状态合并后再进行 DOM 更新。
+
+    2.如果 setState 在原生 JavaScript 控制的范围被调用，它就是同步的。
+    比如：原生事件处理函数中, 定时器回调函数中, Ajax 回调函数中, 此时 setState 被调用后会立即更新 DOM 。
+
+    其实，我们看到的所谓的 “异步”，是开启了 “批量更新” 模式的。
+    “批量更新” 模式：可以减少真实dom渲染的次数。所以只要是react能够控制的范围，出于性能因素考虑，一定是批量更新模式。
+    批量更新会先合并状态，再一次性的做dom更新。
+    
+    因此，setState 异步（或者说是批量更新）的一个重要动机就是避免频繁的 re-render。
+</body>
+</html>

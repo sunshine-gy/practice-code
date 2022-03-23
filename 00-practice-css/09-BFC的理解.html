@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    .arrow {
+            border-top: 10px solid #000;
+            border-right: 10px solid transparent;
+            display: inline-block;
+          }
+</style>
 <body>
     BFC（Block Formatting Context）格式化上下文，是 Web 页面中盒模型布局的 CSS 渲染模式，
     指一个独立的渲染区域或者说是一个隔离的独立容器。
@@ -22,5 +29,7 @@
         3.BFC 的区域不会与 float 的元素区域重叠。
         4.计算 BFC 的高度时，浮动元素也参与计算
         5.BFC 就是页面上的一个独立容器，容器里面的子元素不会影响外面元素。
+        
+          <span class="arrow"></span>
 </body>
 </html>

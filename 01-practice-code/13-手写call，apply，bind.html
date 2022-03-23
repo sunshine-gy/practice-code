@@ -52,7 +52,7 @@
         return [...arguments];
       }
 
-      console.log(fn.apply(obj1, [1, 2])); // [1, 2]
+      console.log(fn.apply1(obj1, [1, 2])); // [1, 2]
 
       //   手写bind
 
@@ -73,6 +73,21 @@
           return _this.apply(context, args.concat(...newFnArgs));
         };
       }
+      // 测试
+       this.a = 1;
+       var module = {
+        a : 2,
+        getA:function() {
+          return this.a;    
+        }
+      };
+      module.getA();//2
+      var getA1 = module.getA;
+      // getA在外部调用，此时的this指向了全局对象
+      getA1();//1 
+      // 再把getA1方法绑定到module环境上
+     var getA2 = getA1.myBind(module);
+     console.log(getA2()); // 2
     </script>
   </body>
 </html>

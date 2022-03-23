@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    vuex 工作原理：
+    疑问1：vuex的store是如何挂载注入到组件中呢？
+    vuex是利用vue的mixin混入机制，在beforeCreate钩子前混入vuexInit方法，vuexInit方法实现了
+    store注入vue组件实例，并注册了vuex store的引用属性$store。
+
+    疑问2：vuex的state和getters是如何映射到各个组件实例中响应式更新状态呢？
+    Vuex的state状态是响应式，是借助vue的data是响应式，将state存入vue实例组件的data中；Vuex的getters
+    则是借助vue的计算属性computed实现数据实时监听。
+
+    vue-router 工作原理：
+    vue-router通过hash与History interface两种方式实现前端路由，更新视图但不重新请求页面”是前端路由原理的核心之一
+    1.全局混入beforeCreate和destroyed 生命钩子，为每个Vue实例设置 _routerRoot属性，并为根实例设置_router属性
+    2.调用Vue中定义的defineReactive对_route进行劫持，其实是执行的依赖收集的过程，执行_route的get就会对当前的组件
+    进行依赖收集，如果对_route进行重新赋值触发setter就会使收集的组件重新渲染，这里也是路由重新渲染的核心所在。
+    3.为Vue原型对象定义router和route属性，并对两个属性进行了劫持，使我们可以直接通过Vue对象实例访问到。
+</body>
+</html>
