@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 该模式的特点：
+      // 1.限制类实例化次数只能一次
+      // 2.类只有一个实例
+      // 3.全局可访问该实例
+      // 4.自行实例化（主动实例化）
+      // 5.可推迟初始化，即延迟执行（与静态类/对象的区别）
+
+      // js手写单例设计模式
+      var Singleton = (function () { // 注意是自行实例化
+        let instance;          //  使用一个变量存储类实例对象
+        return function (name) {
+          if (instance) {      // 存在则返回同一个实例
+            return instance;
+          }
+          this.name = name;   // 不存在则创建实例返回
+          return (instance = this);
+        };
+      })();
+      var a = new Singleton("张三");
+      var b = new Singleton("李四");
+      console.log(a.name); //张三
+      console.log(b.name); //张三
+    </script>
+  </body>
+</html>
