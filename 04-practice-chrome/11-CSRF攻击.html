@@ -24,7 +24,13 @@
     2.3需要用户打开一个第三方站点，可以是黑客的站点，也可以是一些论坛。
 
     如何防止 CSRF 攻击：
-    1. 充分利用好 Cookie 的 SameSite 属性，因为Cookie 正是浏览器和服务器之间维护登录状态的一个关键数据
+    1. 充分利用好 Cookie 的 SameSite 属性，因为Cookie 正是浏览器和服务器之间维护登录状态的一个关键数据.
+    SameSite 选项通常有 Strict、Lax 和 None 三个值:
+    1.1.Strict 最为严格。如果 SameSite 的值是 Strict，那么浏览器会完全禁止第三方Cookie。
+    1.2.Lax 相对宽松一点。在跨站点的情况下，从第三方站点的链接打开和从第三方站点提交
+    Get 方式的表单这两种方式都会携带 Cookie。但如果在第三方站点中使用 Post 方法，
+    或者通过 img、iframe 等标签加载的 URL，这些场景都不会携带 Cookie。
+    1.3.如果使用 None 的话，在任何情况下都会发送 Cookie 数据。
 
     2. 服务端验证请求的来源站点，主要验证请求头中的 Referer 和 Origin 属性，服务器优先判断Origin 属性
 

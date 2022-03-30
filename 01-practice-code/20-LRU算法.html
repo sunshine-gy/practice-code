@@ -32,7 +32,7 @@
           else if (this.secretKey.size < this.capacity) {
             this.secretKey.set(key, value);
           }
-          // 添加新key，删除旧key
+          // key 不存在，cache已满，添加新key，删除旧key
           else {
             this.secretKey.set(key, value);
             // 删除map的第一个元素，即为最长未使用的

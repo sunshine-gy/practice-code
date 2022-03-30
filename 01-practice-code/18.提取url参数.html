@@ -26,7 +26,37 @@
       }
       console.log(getUrlParam('http://www.nowcoder.com?key=1&key=2&key=3&test=4#hehe', 'key'));
 
-      
+      // 反转 URL 
+      // 如https://www.baidu.com/dev-ops/question => https://question/ops-dev/com.baidu.www
+      // 思路：先入栈，(要考虑是否有分隔符)，并且最后一个需要单独push入栈，最后再出栈拼接。
+      function reverseUrl(url) {
+        let stack = [];
+        let res = 'https://';
+        let newUrl = url.split('//')[1].split('');
+        console.log(newUrl);
+        let left = 0;
+        let right = 0;
+        while(right < newUrl.length) {
+          let rightVal = newUrl[right];
+          if(rightVal == '.' || rightVal == '/' || rightVal == '-') {         
+              let cur = newUrl.slice(left, right);
+              stack.push(cur.join(''));
+              stack.push(rightVal)
+              left = right + 1;
+              right++                   
+          } else {
+            right++
+          }
+        }
+        let last = newUrl.slice(left, right).join('');
+        stack.push(last);
+        console.log(stack);
+        while(stack.length) {
+          res += stack.pop()
+        }
+        return res
+      }
+      console.log(reverseUrl('https://www.baidu.com/dev-ops/question'));
     </script>
   </body>
 </html>
