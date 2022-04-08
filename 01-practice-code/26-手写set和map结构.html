@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // set 结构
+      class Set {
+        constructor() {
+          this.items = {};
+          this.size = 0;
+        }
+
+        has(element) {
+          return element in this.items;
+        }
+
+        add(element) {
+          if (!this.has(element)) {
+            this.items[element] = element;
+            this.size++;
+          }
+          return this;
+        }
+
+        delete(element) {
+          if (this.has(element)) {
+            delete this.items[element];
+            this.size--;
+          }
+          return this;
+        }
+
+        clear() {
+          this.items = {};
+          this.size = 0;
+        }
+
+        values() {
+          let values = [];
+          for (let key in this.items) {
+            if (this.items.hasOwnProperty(key)) {
+              values.push(key);
+            }
+          }
+          return values;
+        }
+      }
+
+      // map 结构
+      function defaultToString(key) {
+        if (key === null) {
+          return "NULL";
+        } else if (key === undefined) {
+          return "UNDEFINED";
+        } else if (
+          Object.prototype.toString.call(key) === "[object Object]" ||
+          Object.prototype.toString.call(key) === "[object Array]"
+        ) {
+          return JSON.stringify(key);
+        }
+        return key.toString();
+      }
+
+      class Map {
+        constructor() {
+          this.items = {};
+          this.size = 0;
+        }
+
+        set(key, value) {
+          if (!this.has(key)) {
+            this.items[defaultToString(key)] = value;
+            this.size++;
+          }
+          return this;
+        }
+
+        get(key) {
+          return this.items[defaultToString(key)];
+        }
+
+        has(key) {
+          return this.items[defaultToString(key)] !== undefined;
+        }
+
+        delete(key) {
+          if (this.has(key)) {
+            delete this.items[key];
+            this.size--;
+          }
+          return this;
+        }
+
+        clear() {
+          this.items = {};
+          this.size = 0;
+        }
+
+        keys() {
+          let keys = [];
+          for (let key in this.items) {
+            if (this.has(key)) {
+              keys.push(key);
+            }
+          }
+          return keys;
+        }
+
+        values() {
+          let values = [];
+          for (let key in this.items) {
+            if (this.has(key)) {
+              values.push(this.items[key]);
+            }
+          }
+          return values;
+        }
+      }
+    </script>
+  </body>
+</html>
