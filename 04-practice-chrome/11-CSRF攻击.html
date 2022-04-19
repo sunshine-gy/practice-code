@@ -33,6 +33,8 @@
     1.3.如果使用 None 的话，在任何情况下都会发送 Cookie 数据。
 
     2. 服务端验证请求的来源站点，主要验证请求头中的 Referer 和 Origin 属性，服务器优先判断Origin 属性
+    referer 显示来源页面的完整地址，而origin显示来源页面的origin: prot+host，不包含路径等信息
+    referer 存在于所有请求，而origin只存在于post请求或则跨域请求
 
     3. CSRF Token，在浏览器向服务器发起请求时，服务器生成一个 CSRF Token。在浏览器端如果要发起转账的请求，
     那么需要带上页面中的 CSRF Token，然后服务器会验证该 Token 是否合法。如果是第三方站点发出的请求则获取不到
